@@ -7,8 +7,8 @@ const app=express();
 //Rutas
 const AuthRoutes=require("./routers/Auth");
 const UserRoutes=require("./routers/Usuarios");
-const DatosRoutes=require("./routers/Datos.routes")
-const Tabla_pRoutes=require("./routers/Tabla_p.routes")
+const DatosRoutes=require("./routers/Datos.routes");
+const Tabla_pRoutes=require("./routers/Tabla_p.routes");
 //const TablasRutes=require("./routers/index");
 //Middlewares para el funcionamiento
 app.use(bodyParser.urlencoded({extended:true}));
