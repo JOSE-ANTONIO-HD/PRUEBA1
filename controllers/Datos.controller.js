@@ -1,10 +1,6 @@
-//import Models from "../models/Datos.models";
 const Models = require("../models/Datos.models");
 
-
-module.exports =  {
-
-  //Endpoint Enviar Datos
+module.exports = {
   postDatos: async (req, res, next) => {
     try {
       const { nombre, direccion, correo, estado, telefono, producto, cantidad, precio_unitario, proveedor } = req.body;
@@ -16,50 +12,51 @@ module.exports =  {
         estado,
         telefono,
         producto,
-        cantidad, 
+        cantidad,
         precio_unitario,
-        proveedor, 
+        proveedor,
       });
 
       const guardar = await guardarDatos.save();
       res.status(200).json(guardar);
-
     } catch (error) {
+      console.error(error);
       res.status(500).send({
-        message: "Error al enviar",
+        message: "Error al guardar los datos",
       });
-      next(error);
     }
   },
-
-  //EndPoint BuscarAll
+  
   getDatos: async (req, res, next) => {
     try {
-
       const obtener = await Models.Datos.find();
       res.status(200).json(obtener);
     } catch (error) {
+      console.error(error);
       res.status(500).send({
         message: "Error al obtener los datos",
       });
-      next(error);
     }
   },
-
+  
   getDato: async (req, res, next) => {
     try {
-
       const obtener = await Models.Datos.findById(req.params.id);
-      res.status(200).json(obtener);
+      if (!obtener) {
+        res.status(404).send({
+          message: "Datos no encontrados",
+        });
+      } else {
+        res.status(200).json(obtener);
+      }
     } catch (error) {
+      console.error(error);
       res.status(500).send({
         message: "Error al obtener los datos",
       });
-      next(error);
     }
   },
-
-  //EndPoint Actualizar
+  
   putDatos: async (req, res, next) => {
     try {
       const { nombre, direccion, correo, estado, telefono, producto, cantidad, precio_unitario } = req.body;
@@ -71,35 +68,44 @@ module.exports =  {
         estado,
         telefono,
         producto,
-        cantidad, 
-        precio_unitario, 
+        cantidad,
+        precio_unitario,
         proveedor,
       };
 
       const actualizar = await Models.Datos.findByIdAndUpdate(req.params.id, actualizarDatos);
-      res.status(200).json(actualizar);
-
+      if (!actualizar) {
+        res.status(404).send({
+          message: "Datos no encontrados",
+        });
+      } else {
+        res.status(200).json(actualizar);
+      }
     } catch (error) {
+      console.error(error);
       res.status(500).send({
-        message: "Error al actualizar",
+        message: "Error al actualizar los datos",
       });
-      next(error);
     }
   },
-
-  //EndPoint eliminar
+  
   delDatos: async (req, res, next) => {
     try {
       const el = await Models.Datos.findByIdAndDelete(req.params.id);
-      res.status(200).send({
-        message: "Datos eliminados correctamente"
-      });
-      //res.status(200).json(el);
+      if (!el) {
+        res.status(404).send({
+          message: "Datos no encontrados",
+        });
+      } else {
+        res.status(200).send({
+          message: "Datos eliminados correctamente"
+        });
+      }
     } catch (error) {
+      console.error(error);
       res.status(500).send({
-        message: "Error al eliminar dato",
+        message: "Error al eliminar los datos",
       });
-      next(error);
     }
   },
-}
+};

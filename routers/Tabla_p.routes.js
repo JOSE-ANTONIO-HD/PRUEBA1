@@ -1,4 +1,4 @@
-const routerx = require("express-promise-router");
+const routerx = require ("express-promise-router");
 const Tablactr = require("../controllers/Tabla.controller");
 
 const router = routerx();

@@ -24,7 +24,7 @@ app.use("/api",AuthRoutes);
 app.use("/api",UserRoutes);
 app.use("/api/datos",DatosRoutes);
 app.use("/api/Proveedor",Tabla_pRoutes);
-//app.use("/api",TablasRutes)
+//app.use("/api",TablasRutes);
 
 
 module.exports=app;

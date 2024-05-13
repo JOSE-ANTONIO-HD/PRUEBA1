@@ -85,7 +85,7 @@ async function refreshAccessToken(req,res){
             accessToken: jwt.createAccessToken(response)
         })
     } catch (error) {
-        res.status(500).send({msg: "Error del servidor"})
+        res.status(500).send({msg: "Error del servidor"});
     }
 }
 
