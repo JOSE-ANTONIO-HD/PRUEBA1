@@ -1,35 +1,35 @@
-const Models = require("../models/Datos.models");
+// Datos.controller.js
+const Datos = require("../models/Datos.models");
 
 module.exports = {
   postDatos: async (req, res, next) => {
     try {
       const { nombre, direccion, correo, estado, telefono, producto, cantidad, precio_unitario, proveedor } = req.body;
 
-      const guardarDatos = new Models.Datos({
+      const guardarDatos = new Datos({
         nombre,
         direccion,
         correo,
         estado,
         telefono,
         producto,
-        cantidad,
+        cantidad, 
         precio_unitario,
-        proveedor,
+        proveedor, 
       });
 
       const guardar = await guardarDatos.save();
       res.status(200).json(guardar);
     } catch (error) {
       console.error(error);
-      res.status(500).send({
-        message: "Error al guardar los datos",
-      });
+      throw error;
+      next();
     }
   },
-  
+
   getDatos: async (req, res, next) => {
     try {
-      const obtener = await Models.Datos.find();
+      const obtener = await Datos.find();
       res.status(200).json(obtener);
     } catch (error) {
       console.error(error);
@@ -38,10 +38,10 @@ module.exports = {
       });
     }
   },
-  
+
   getDato: async (req, res, next) => {
     try {
-      const obtener = await Models.Datos.findById(req.params.id);
+      const obtener = await Datos.findById(req.params.id);
       if (!obtener) {
         res.status(404).send({
           message: "Datos no encontrados",
@@ -56,11 +56,10 @@ module.exports = {
       });
     }
   },
-  
+
   putDatos: async (req, res, next) => {
     try {
-      const { nombre, direccion, correo, estado, telefono, producto, cantidad, precio_unitario } = req.body;
-
+      const { nombre, direccion, correo, estado, telefono, producto, cantidad, precio_unitario, proveedor } = req.body;
       const actualizarDatos = {
         nombre,
         direccion,
@@ -68,12 +67,11 @@ module.exports = {
         estado,
         telefono,
         producto,
-        cantidad,
-        precio_unitario,
+        cantidad, 
+        precio_unitario, 
         proveedor,
       };
-
-      const actualizar = await Models.Datos.findByIdAndUpdate(req.params.id, actualizarDatos);
+      const actualizar = await Datos.findByIdAndUpdate(req.params.id, actualizarDatos);
       if (!actualizar) {
         res.status(404).send({
           message: "Datos no encontrados",
@@ -88,10 +86,10 @@ module.exports = {
       });
     }
   },
-  
+
   delDatos: async (req, res, next) => {
     try {
-      const el = await Models.Datos.findByIdAndDelete(req.params.id);
+      const el = await Datos.findByIdAndDelete(req.params.id);
       if (!el) {
         res.status(404).send({
           message: "Datos no encontrados",

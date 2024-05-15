@@ -1,11 +1,12 @@
-const Models = require("../models/Tabla_p.models");
+// Tabla.controller.js
+const Tabla_p = require("../models/Tabla_p.models");
 
 module.exports = {
   postTabla_p: async (req, res, next) => {
     try {
       const { nombre, direccion, correo, estado, telefono, producto, cantidad, precio_unitario, proveedor } = req.body;
 
-      const guardarTabla_p = new Models.Tabla_p({
+      const guardarTabla_p = new Tabla_p({
         nombre,
         direccion,
         correo,
@@ -29,7 +30,7 @@ module.exports = {
 
   getTabla_p: async (req, res, next) => {
     try {
-      const obtener = await Models.Tabla_p.find();
+      const obtener = await Tabla_p.find();
       res.status(200).json(obtener);
     } catch (error) {
       console.error(error);
@@ -41,7 +42,7 @@ module.exports = {
 
   getTabla_: async (req, res, next) => {
     try {
-      const obtener = await Models.Tabla_p.findById(req.params.id);
+      const obtener = await Tabla_p.findById(req.params.id);
       if (!obtener) {
         res.status(404).send({
           message: "Datos no encontrados",
@@ -73,7 +74,7 @@ module.exports = {
         proveedor,
       };
 
-      const actualizar = await Models.Tabla_p.findByIdAndUpdate(req.params.id, actualizarTabla_p);
+      const actualizar = await Tabla_p.findByIdAndUpdate(req.params.id, actualizarTabla_p);
       if (!actualizar) {
         res.status(404).send({
           message: "Datos no encontrados",
@@ -91,7 +92,7 @@ module.exports = {
 
   delTabla_p: async (req, res, next) => {
     try {
-      const el = await Models.Tabla_p.findByIdAndDelete(req.params.id);
+      const el = await Tabla_p.findByIdAndDelete(req.params.id);
       if (!el) {
         res.status(404).send({
           message: "Datos no encontrados",
