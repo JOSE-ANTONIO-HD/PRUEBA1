@@ -16,6 +16,7 @@ module.exports = {
         cantidad,
         precio_unitario,
         proveedor,
+        fecha: new Date().toLocaleDateString() // Agrega la fecha actual en formato día/mes/año
       });
 
       const guardar = await guardarTabla_p.save();
@@ -72,6 +73,7 @@ module.exports = {
         cantidad,
         precio_unitario,
         proveedor,
+        fecha: new Date().toLocaleDateString() // Agrega la fecha actual en formato día/mes/año
       };
 
       const actualizar = await Tabla_p.findByIdAndUpdate(req.params.id, actualizarTabla_p);
