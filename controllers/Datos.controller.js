@@ -1,4 +1,5 @@
 // Datos.controller.js
+// Datos.controller.js
 const Datos = require("../models/Datos.models");
 
 module.exports = {
@@ -15,7 +16,8 @@ module.exports = {
         producto,
         cantidad, 
         precio_unitario,
-        proveedor, 
+        proveedor,
+        fecha: new Date() // Agrega la fecha actual al guardar los datos
       });
 
       const guardar = await guardarDatos.save();
@@ -70,6 +72,7 @@ module.exports = {
         cantidad, 
         precio_unitario, 
         proveedor,
+        fecha: new Date() // Agrega la fecha actual al actualizar los datos
       };
       const actualizar = await Datos.findByIdAndUpdate(req.params.id, actualizarDatos);
       if (!actualizar) {

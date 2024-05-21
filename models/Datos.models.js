@@ -1,3 +1,4 @@
+
 // Datos.models.js
 const mongoose = require("mongoose");
 
@@ -10,7 +11,8 @@ const datosSchema = mongoose.Schema({
     producto: String,
     cantidad: Number, 
     precio_unitario: Number,
-    proveedor: Number, 
+    proveedor: Number,
+    fecha: Date // Agrega un campo de fecha para almacenar la fecha de edición o añadimiento
 });
 
 const Datos = mongoose.model('Datos', datosSchema);
