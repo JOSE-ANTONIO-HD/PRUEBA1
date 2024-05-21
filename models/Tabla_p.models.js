@@ -12,7 +12,7 @@ const tabla_p = mongoose.Schema(
         cantidad: Number, 
         precio_unitario: Number,
         proveedor: Number,
-        fecha: Date // Agrega un campo de fecha para almacenar la fecha de edición o añadimiento
+        fecha: { type: Date, default: Date.now }, // Campo para la fecha de creación o actualización
     }
 );
 
